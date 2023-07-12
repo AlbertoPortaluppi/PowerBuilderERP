@@ -1,4 +1,4 @@
-CREATE TABLE produtos (
+CREATE TABLE produto (
   idproduto SERIAL PRIMARY KEY,
   flaginativo CHAR(1) NOT NULL,
   nome VARCHAR(100) NOT NULL,
@@ -7,9 +7,18 @@ CREATE TABLE produtos (
   quantidade INTEGER DEFAULT 0
 );
 
+CREATE TABLE empresa (
+  idempresa SERIAL PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  cnpj VARCHAR(14) NOT NULL,
+  endereco VARCHAR(100),
+  telefone VARCHAR(20)
+);
+
 -- Tabela de usuários
-CREATE TABLE usuarios (
+CREATE TABLE usuario (
   idusuario SERIAL PRIMARY KEY,
+  idempresa INTEGER REFERENCES empresa(idempresa),
   flaginativo CHAR(1) NOT NULL,
   nome VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
@@ -19,7 +28,7 @@ CREATE TABLE usuarios (
 -- Tabela de controle de estoque
 CREATE TABLE controle_estoque (
   idcontrole SERIAL PRIMARY KEY,
-  idproduto INTEGER REFERENCES produtos(idproduto),
+  idproduto INTEGER REFERENCES produto(idproduto),
   data_movimento DATE NOT NULL,
   tipo_movimento VARCHAR(10) NOT NULL,
   quantidade INTEGER NOT NULL
@@ -36,67 +45,77 @@ CREATE TABLE cliente_fornecedor (
   telefone VARCHAR(20)
 );
 
--- Tabela de compras
-CREATE TABLE compras (
+-- Tabela de compra
+CREATE TABLE compra (
   idcompra SERIAL PRIMARY KEY,
-  idusuario INTEGER REFERENCES usuarios(idusuario),
-  idproduto INTEGER REFERENCES produtos(idproduto),
+  idusuario INTEGER REFERENCES usuario(idusuario),
+  idproduto INTEGER REFERENCES produto(idproduto),
   idclifor INTEGER REFERENCES cliente_fornecedor(idclifor),
   data_compra DATE NOT NULL,
   quantidade INTEGER NOT NULL
 );
 
--- Tabela de vendas
-CREATE TABLE vendas (
+-- Tabela de venda
+CREATE TABLE venda (
   idvenda SERIAL PRIMARY KEY,
-  idusuario INTEGER REFERENCES usuarios(idusuario),
-  idproduto INTEGER REFERENCES produtos(idproduto),
+  idusuario INTEGER REFERENCES usuario(idusuario),
+  idproduto INTEGER REFERENCES produto(idproduto),
   idclifor INTEGER REFERENCES cliente_fornecedor(idclifor),
   data_venda DATE NOT NULL,
   quantidade INTEGER NOT NULL
 );
 
--- Inserção de produtos de supermercado
-INSERT INTO produtos (nome, flaginativo, descricao, preco, quantidade)
+-- Inserção de produto de supermercado
+INSERT INTO produto (nome, flaginativo, descricao, preco, quantidade)
 VALUES ('Arroz', 'F', 'Arroz branco', 10.99, 50);
 
-INSERT INTO produtos (nome, flaginativo, descricao, preco, quantidade)
+INSERT INTO produto (nome, flaginativo, descricao, preco, quantidade)
 VALUES ('Feijão', 'F', 'Feijão carioca', 6.99, 30);
 
-INSERT INTO produtos (nome, flaginativo, descricao, preco, quantidade)
+INSERT INTO produto (nome, flaginativo, descricao, preco, quantidade)
 VALUES ('Macarrão', 'F', 'Macarrão espaguete', 4.99, 20);
 
-INSERT INTO produtos (nome, flaginativo, descricao, preco, quantidade)
+INSERT INTO produto (nome, flaginativo, descricao, preco, quantidade)
 VALUES ('Leite', 'F', 'Leite integral', 3.49, 40);
 
-INSERT INTO produtos (nome, flaginativo, descricao, preco, quantidade)
+INSERT INTO produto (nome, flaginativo, descricao, preco, quantidade)
 VALUES ('Pão de Forma', 'F', 'Pão de forma integral', 5.99, 25);
 
-INSERT INTO produtos (nome, flaginativo, descricao, preco, quantidade)
+INSERT INTO produto (nome, flaginativo, descricao, preco, quantidade)
 VALUES ('Óleo de Soja', 'F', 'Óleo de soja refinado', 7.99, 15);
 
-INSERT INTO produtos (nome, flaginativo, descricao, preco, quantidade)
+INSERT INTO produto (nome, flaginativo, descricao, preco, quantidade)
 VALUES ('Café', 'F', 'Café em pó', 8.99, 10);
 
-INSERT INTO produtos (nome, flaginativo, descricao, preco, quantidade)
+INSERT INTO produto (nome, flaginativo, descricao, preco, quantidade)
 VALUES ('Açúcar', 'F', 'Açúcar refinado', 3.99, 20);
 
-INSERT INTO produtos (nome, flaginativo, descricao, preco, quantidade)
+INSERT INTO produto (nome, flaginativo, descricao, preco, quantidade)
 VALUES ('Sal', 'F', 'Sal refinado', 2.49, 30);
 
-INSERT INTO produtos (nome, flaginativo, descricao, preco, quantidade)
+INSERT INTO produto (nome, flaginativo, descricao, preco, quantidade)
 VALUES ('Farinha de Trigo', 'F', 'Farinha de trigo comum', 4.49, 15);
+
+-- Inserção de empresas
+INSERT INTO empresa (nome, cnpj, endereco, telefone)
+VALUES ('Empresa A', '12345678901234', 'Endereço da Empresa A', '1234567890');
+
+INSERT INTO empresa (nome, cnpj, endereco, telefone)
+VALUES ('Empresa B', '98765432109876', 'Endereço da Empresa B', '9876543210');
+
+INSERT INTO empresa (nome, cnpj, endereco, telefone)
+VALUES ('Empresa C', '56789012345678', 'Endereço da Empresa C', '5678901234');
 
 
 -- Inserção de usuários
-INSERT INTO usuarios (nome, flaginativo, email, senha)
-VALUES('Alberto', 'F', 'a@a', '1');
+INSERT INTO usuario (nome, flaginativo, idempresa, email, senha)
+VALUES('Alberto', 'F', 1, 'a@a', '1');
 
-INSERT INTO usuarios (nome, flaginativo, email, senha)
-VALUES ('Maria Santos', 'F', 'maria.santos@example.com', 'senha456');
+INSERT INTO usuario (nome, flaginativo, idempresa, email, senha)
+VALUES ('Maria Santos', 'F', 1, 'maria.santos@example.com', 'senha456');
 
-INSERT INTO usuarios (nome, flaginativo, email, senha)
-VALUES ('Pedro Almeida', 'F', 'pedro.almeida@example.com', 'senha789');
+INSERT INTO usuario (nome, flaginativo, idempresa, email, senha)
+VALUES ('Pedro Almeida', 'F', 1, 'pedro.almeida@example.com', 'senha789');
 
 
 -- Inserção de clientes_fornecedores
