@@ -3,8 +3,7 @@ CREATE TABLE produto (
   flaginativo CHAR(1) NOT NULL,
   nome VARCHAR(100) NOT NULL,
   descricao TEXT,
-  preco NUMERIC(10, 2) NOT NULL,
-  quantidade INTEGER DEFAULT 0
+  preco NUMERIC(10, 2) NOT NULL
 );
 
 CREATE TABLE empresa (
@@ -46,24 +45,15 @@ CREATE TABLE cliente_fornecedor (
   telefone VARCHAR(20)
 );
 
--- Tabela de compra
-CREATE TABLE compra (
-  idcompra SERIAL PRIMARY KEY,
+-- Tabela de compras e vendas
+CREATE TABLE compra_venda (
+  idmovimento SERIAL PRIMARY KEY,
   idusuario INTEGER REFERENCES usuario(idusuario),
   idproduto INTEGER REFERENCES produto(idproduto),
   idclifor INTEGER REFERENCES cliente_fornecedor(idclifor),
-  data_compra DATE NOT NULL,
-  quantidade INTEGER NOT NULL
-);
-
--- Tabela de venda
-CREATE TABLE venda (
-  idvenda SERIAL PRIMARY KEY,
-  idusuario INTEGER REFERENCES usuario(idusuario),
-  idproduto INTEGER REFERENCES produto(idproduto),
-  idclifor INTEGER REFERENCES cliente_fornecedor(idclifor),
-  data_venda DATE NOT NULL,
-  quantidade INTEGER NOT NULL
+  data_movimento DATE NOT NULL,
+  quantidade INTEGER NOT NULL,
+  tipomovimento VARCHAR(2) NOT NULL --C = COMPRA | V = VENDA | DC = DEV. COMPRA | DV = DEV. VENDA
 );
 
 -- Inserção de produto de supermercado
