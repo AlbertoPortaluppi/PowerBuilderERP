@@ -51,7 +51,8 @@ CREATE TABLE compra_venda (
   idempresa INTEGER REFERENCES empresa(idempresa),
   data_movimento DATE NOT NULL,
   quantidade INTEGER NOT NULL,
-  tipomovimento VARCHAR(2) NOT NULL --C = COMPRA | V = VENDA | DC = DEV. COMPRA | DV = DEV. VENDA
+  tipomovimento VARCHAR(2) NOT NULL, --C = COMPRA | V = VENDA | DC = DEV. COMPRA | DV = DEV. VENDA
+  preco NUMERIC(10, 2) DEFAULT 0
 );
 
 CREATE TABLE produto_preco_venda (
