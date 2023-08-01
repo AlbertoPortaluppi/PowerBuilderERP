@@ -29,8 +29,6 @@ CREATE TABLE controle_estoque (
   idcontrole SERIAL PRIMARY KEY,
   idproduto INTEGER REFERENCES produto(idproduto),
   idempresa INTEGER REFERENCES empresa(idempresa),
-  data_movimento DATE NOT NULL,
-  tipo_movimento VARCHAR(10) NOT NULL,
   quantidade INTEGER NOT NULL
 );
 
