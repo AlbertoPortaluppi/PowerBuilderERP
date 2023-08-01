@@ -57,7 +57,7 @@ CREATE TABLE compra_venda (
 CREATE TABLE produto_preco_venda (
   idproduto INTEGER REFERENCES produto(idproduto),
   idempresa INTEGER REFERENCES empresa(idempresa),
-  preco DECIMAL(16,2) DEFAULT 0
+  preco NUMERIC(10, 2) DEFAULT 0
 )
 -- Inserção de produto de supermercado
 INSERT INTO produto (nome, flaginativo, descricao, preco, quantidade)
