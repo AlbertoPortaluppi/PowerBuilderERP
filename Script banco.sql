@@ -2,8 +2,7 @@ CREATE TABLE produto (
   idproduto SERIAL PRIMARY KEY,
   flaginativo CHAR(1) NOT NULL,
   nome VARCHAR(100) NOT NULL,
-  descricao TEXT,
-  preco NUMERIC(10, 2) NOT NULL
+  descricao TEXT
 );
 
 CREATE TABLE empresa (
@@ -49,11 +48,17 @@ CREATE TABLE compra_venda (
   idusuario INTEGER REFERENCES usuario(idusuario),
   idproduto INTEGER REFERENCES produto(idproduto),
   idclifor INTEGER REFERENCES cliente_fornecedor(idclifor),
+  idempresa INTEGER REFERENCES empresa(idempresa),
   data_movimento DATE NOT NULL,
   quantidade INTEGER NOT NULL,
   tipomovimento VARCHAR(2) NOT NULL --C = COMPRA | V = VENDA | DC = DEV. COMPRA | DV = DEV. VENDA
 );
 
+CREATE TABLE produto_preco_venda (
+  idproduto INTEGER REFERENCES produto(idproduto),
+  idempresa INTEGER REFERENCES empresa(idempresa),
+  preco DECIMAL(16,2) DEFAULT 0
+)
 -- Inserção de produto de supermercado
 INSERT INTO produto (nome, flaginativo, descricao, preco, quantidade)
 VALUES ('Arroz', 'F', 'Arroz branco', 10.99, 50);
