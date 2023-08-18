@@ -1,0 +1,9 @@
+Save Format v3.0(19990112)
+@begin Libraries
+ "Fontes\\tcc.pbl" "";
+@end;
+@begin Objects
+ "Fontes\\m_menu.srm" "Fontes\\tcc.pbl";
+ "Fontes\\w_ancestor.srw" "Fontes\\tcc.pbl";
+ "Fontes\\tcc.sra" "Fontes\\tcc.pbl";
+@end;
