@@ -3,5 +3,6 @@ Save Format v3.0(19990112)
  "Fontes\\telas.pbl" "";
 @end;
 @begin Objects
+ "Fontes\\w_menu.srw" "Fontes\\telas.pbl";
  "Fontes\\w_login.srw" "Fontes\\telas.pbl";
 @end;
