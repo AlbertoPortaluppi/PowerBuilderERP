@@ -1,0 +1,18 @@
+Save Format v3.0(19990112)
+@begin Libraries
+ "Fontes\\cadastros.pbl" "";
+@end;
+@begin Objects
+ "Fontes\\d_filtros_usuario.srd" "Fontes\\cadastros.pbl";
+ "Fontes\\d_filtros_produto.srd" "Fontes\\cadastros.pbl";
+ "Fontes\\d_ddd_idempresa.srd" "Fontes\\cadastros.pbl";
+ "Fontes\\d_cadempresa.srd" "Fontes\\cadastros.pbl";
+ "Fontes\\w_cadempresa.srw" "Fontes\\cadastros.pbl";
+ "Fontes\\d_cadusuario.srd" "Fontes\\cadastros.pbl";
+ "Fontes\\w_cadusuario.srw" "Fontes\\cadastros.pbl";
+ "Fontes\\d_cadproduto.srd" "Fontes\\cadastros.pbl";
+ "Fontes\\w_cadproduto.srw" "Fontes\\cadastros.pbl";
+ "Fontes\\w_ancestor_cadastro.srw" "Fontes\\cadastros.pbl";
+ "Fontes\\d_filtros_ancestor.srd" "Fontes\\cadastros.pbl";
+ "Fontes\\d_filtros_empresas.srd" "Fontes\\cadastros.pbl";
+@end;
