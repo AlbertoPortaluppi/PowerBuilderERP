@@ -1,0 +1,11 @@
+Save Format v3.0(19990112)
+@begin Libraries
+ "Fontes\\componentes.pbl" "";
+@end;
+@begin Objects
+ "Fontes\\u_ddlb.sru" "Fontes\\componentes.pbl";
+ "Fontes\\u_editmask.sru" "Fontes\\componentes.pbl";
+ "Fontes\\u_commandbutton.sru" "Fontes\\componentes.pbl";
+ "Fontes\\u_statictext.sru" "Fontes\\componentes.pbl";
+ "Fontes\\u_singlelineedit.sru" "Fontes\\componentes.pbl";
+@end;
