@@ -1,0 +1,7 @@
+Save Format v3.0(19990112)
+@begin Libraries
+ "Fontes\\telas.pbl" "";
+@end;
+@begin Objects
+ "Fontes\\w_login.srw" "Fontes\\telas.pbl";
+@end;
