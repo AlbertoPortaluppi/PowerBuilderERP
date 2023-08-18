@@ -1,0 +1,526 @@
+HA$PBExportHeader$m_menu.srm
+forward
+global type m_menu from menu
+end type
+type m_asdfsd from menu within m_menu
+end type
+type m_cadastrodeprodutos from menu within m_asdfsd
+end type
+type m_cadastrodeusu$$HEX1$$e100$$ENDHEX$$rios from menu within m_asdfsd
+end type
+type m_cadastrodefornecedores from menu within m_asdfsd
+end type
+type m_cadastrodeempresas from menu within m_asdfsd
+end type
+type m_asdfsd from menu within m_menu
+m_cadastrodeprodutos m_cadastrodeprodutos
+m_cadastrodeusu$$HEX1$$e100$$ENDHEX$$rios m_cadastrodeusu$$HEX1$$e100$$ENDHEX$$rios
+m_cadastrodefornecedores m_cadastrodefornecedores
+m_cadastrodeempresas m_cadastrodeempresas
+end type
+type m_fasddfas from menu within m_menu
+end type
+type m_comprarprodutos from menu within m_fasddfas
+end type
+type m_fasddfas from menu within m_menu
+m_comprarprodutos m_comprarprodutos
+end type
+type m_asfasdfsdfg from menu within m_menu
+end type
+type m_venderprodutos from menu within m_asfasdfsdfg
+end type
+type m_asfasdfsdfg from menu within m_menu
+m_venderprodutos m_venderprodutos
+end type
+type m_1 from menu within m_menu
+end type
+type m_checarestoque from menu within m_1
+end type
+type m_1 from menu within m_menu
+m_checarestoque m_checarestoque
+end type
+type m_trocarempresa from menu within m_menu
+end type
+type m_sobre from menu within m_menu
+end type
+global type m_menu from menu
+m_asdfsd m_asdfsd
+m_fasddfas m_fasddfas
+m_asfasdfsdfg m_asfasdfsdfg
+m_1 m_1
+m_trocarempresa m_trocarempresa
+m_sobre m_sobre
+end type
+end forward
+
+global type m_menu from menu
+m_asdfsd m_asdfsd
+m_fasddfas m_fasddfas
+m_asfasdfsdfg m_asfasdfsdfg
+m_1 m_1
+m_trocarempresa m_trocarempresa
+m_sobre m_sobre
+end type
+global m_menu m_menu
+
+on m_menu.create
+m_menu=this
+call super::create
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = -8
+this.weight = 400
+this.facename = "Arial"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 33454915
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_asdfsd=create m_asdfsd
+this.m_fasddfas=create m_fasddfas
+this.m_asfasdfsdfg=create m_asfasdfsdfg
+this.m_1=create m_1
+this.m_trocarempresa=create m_trocarempresa
+this.m_sobre=create m_sobre
+this.Item[UpperBound(this.Item)+1]=this.m_asdfsd
+this.Item[UpperBound(this.Item)+1]=this.m_fasddfas
+this.Item[UpperBound(this.Item)+1]=this.m_asfasdfsdfg
+this.Item[UpperBound(this.Item)+1]=this.m_1
+this.Item[UpperBound(this.Item)+1]=this.m_trocarempresa
+this.Item[UpperBound(this.Item)+1]=this.m_sobre
+end on
+
+on m_menu.destroy
+call super::destroy
+destroy(this.m_asdfsd)
+destroy(this.m_fasddfas)
+destroy(this.m_asfasdfsdfg)
+destroy(this.m_1)
+destroy(this.m_trocarempresa)
+destroy(this.m_sobre)
+end on
+
+event clicked;Open(w_cadempresa)
+end event
+
+type m_asdfsd from menu within m_menu
+m_cadastrodeprodutos m_cadastrodeprodutos
+m_cadastrodeusu$$HEX1$$e100$$ENDHEX$$rios m_cadastrodeusu$$HEX1$$e100$$ENDHEX$$rios
+m_cadastrodefornecedores m_cadastrodefornecedores
+m_cadastrodeempresas m_cadastrodeempresas
+end type
+
+on m_asdfsd.create
+call super::create
+this.text = "Cadastros"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = -8
+this.weight = 400
+this.facename = "Arial"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 33454915
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_cadastrodeprodutos=create m_cadastrodeprodutos
+this.m_cadastrodeusu$$HEX1$$e100$$ENDHEX$$rios=create m_cadastrodeusu$$HEX1$$e100$$ENDHEX$$rios
+this.m_cadastrodefornecedores=create m_cadastrodefornecedores
+this.m_cadastrodeempresas=create m_cadastrodeempresas
+this.Item[UpperBound(this.Item)+1]=this.m_cadastrodeprodutos
+this.Item[UpperBound(this.Item)+1]=this.m_cadastrodeusu$$HEX1$$e100$$ENDHEX$$rios
+this.Item[UpperBound(this.Item)+1]=this.m_cadastrodefornecedores
+this.Item[UpperBound(this.Item)+1]=this.m_cadastrodeempresas
+end on
+
+on m_asdfsd.destroy
+call super::destroy
+destroy(this.m_cadastrodeprodutos)
+destroy(this.m_cadastrodeusu$$HEX1$$e100$$ENDHEX$$rios)
+destroy(this.m_cadastrodefornecedores)
+destroy(this.m_cadastrodeempresas)
+end on
+
+type m_cadastrodeprodutos from menu within m_asdfsd
+end type
+
+on m_cadastrodeprodutos.create
+call super::create
+this.text = "Cadastro de Produtos"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = -8
+this.weight = 400
+this.facename = "Arial"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 33454915
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cadastrodeprodutos.destroy
+call super::destroy
+end on
+
+event clicked;Open(w_cadproduto)
+end event
+
+type m_cadastrodeusu$$HEX1$$e100$$ENDHEX$$rios from menu within m_asdfsd
+end type
+
+on m_cadastrodeusu$$HEX1$$e100$$ENDHEX$$rios.create
+call super::create
+this.text = "Cadastro de Usu$$HEX1$$e100$$ENDHEX$$rios"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = -8
+this.weight = 400
+this.facename = "Arial"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 33454915
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cadastrodeusu$$HEX1$$e100$$ENDHEX$$rios.destroy
+call super::destroy
+end on
+
+event clicked;Open(w_cadusuario)
+end event
+
+type m_cadastrodefornecedores from menu within m_asdfsd
+end type
+
+on m_cadastrodefornecedores.create
+call super::create
+this.text = "Cadastro de Clientes e Fornecedores"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = -8
+this.weight = 400
+this.facename = "Arial"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 33454915
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cadastrodefornecedores.destroy
+call super::destroy
+end on
+
+type m_cadastrodeempresas from menu within m_asdfsd
+end type
+
+on m_cadastrodeempresas.create
+call super::create
+this.text = "Cadastro de Empresas"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = -8
+this.weight = 400
+this.facename = "Arial"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 33454915
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cadastrodeempresas.destroy
+call super::destroy
+end on
+
+event clicked;Open(w_cadempresa)
+end event
+
+type m_fasddfas from menu within m_menu
+m_comprarprodutos m_comprarprodutos
+end type
+
+on m_fasddfas.create
+call super::create
+this.text = "Compras"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = -8
+this.weight = 400
+this.facename = "Arial"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 33454915
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_comprarprodutos=create m_comprarprodutos
+this.Item[UpperBound(this.Item)+1]=this.m_comprarprodutos
+end on
+
+on m_fasddfas.destroy
+call super::destroy
+destroy(this.m_comprarprodutos)
+end on
+
+type m_comprarprodutos from menu within m_fasddfas
+end type
+
+on m_comprarprodutos.create
+call super::create
+this.text = "Comprar Produtos"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = -8
+this.weight = 400
+this.facename = "Arial"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 33454915
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_comprarprodutos.destroy
+call super::destroy
+end on
+
+type m_asfasdfsdfg from menu within m_menu
+m_venderprodutos m_venderprodutos
+end type
+
+on m_asfasdfsdfg.create
+call super::create
+this.text = "Vendas"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = -8
+this.weight = 400
+this.facename = "Arial"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 33454915
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_venderprodutos=create m_venderprodutos
+this.Item[UpperBound(this.Item)+1]=this.m_venderprodutos
+end on
+
+on m_asfasdfsdfg.destroy
+call super::destroy
+destroy(this.m_venderprodutos)
+end on
+
+type m_venderprodutos from menu within m_asfasdfsdfg
+end type
+
+on m_venderprodutos.create
+call super::create
+this.text = "Vender Produtos"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = -8
+this.weight = 400
+this.facename = "Arial"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 33454915
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_venderprodutos.destroy
+call super::destroy
+end on
+
+type m_1 from menu within m_menu
+m_checarestoque m_checarestoque
+end type
+
+on m_1.create
+call super::create
+this.text = "Controle de Estoque"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = -8
+this.weight = 400
+this.facename = "Arial"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 33454915
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_checarestoque=create m_checarestoque
+this.Item[UpperBound(this.Item)+1]=this.m_checarestoque
+end on
+
+on m_1.destroy
+call super::destroy
+destroy(this.m_checarestoque)
+end on
+
+type m_checarestoque from menu within m_1
+end type
+
+on m_checarestoque.create
+call super::create
+this.text = "Checar Estoque"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = -8
+this.weight = 400
+this.facename = "Arial"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 33454915
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_checarestoque.destroy
+call super::destroy
+end on
+
+type m_trocarempresa from menu within m_menu
+end type
+
+on m_trocarempresa.create
+call super::create
+this.text = "Trocar Empresa"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = -8
+this.weight = 400
+this.facename = "Arial"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 33454915
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_trocarempresa.destroy
+call super::destroy
+end on
+
+type m_sobre from menu within m_menu
+end type
+
+on m_sobre.create
+call super::create
+this.text = "Sobre"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = -8
+this.weight = 400
+this.facename = "Arial"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 33454915
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_sobre.destroy
+call super::destroy
+end on
+
