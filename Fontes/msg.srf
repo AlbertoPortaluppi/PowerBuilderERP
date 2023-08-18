@@ -1,0 +1,11 @@
+HA$PBExportHeader$msg.srf
+global type msg from function_object
+end type
+
+forward prototypes
+global subroutine msg (string as_msg)
+end prototypes
+
+global subroutine msg (string as_msg);MessageBox('ERP', as_msg)
+end subroutine
+
