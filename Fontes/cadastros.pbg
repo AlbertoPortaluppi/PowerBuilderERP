@@ -17,4 +17,5 @@ Save Format v3.0(19990112)
  "Fontes\\w_ancestor_cadastro.srw" "Fontes\\cadastros.pbl";
  "Fontes\\d_filtros_ancestor.srd" "Fontes\\cadastros.pbl";
  "Fontes\\d_filtros_empresas.srd" "Fontes\\cadastros.pbl";
+ "Fontes\\d_filtros_clifor.srd" "Fontes\\cadastros.pbl";
 @end;
