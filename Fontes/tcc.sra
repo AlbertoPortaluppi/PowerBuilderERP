@@ -11,7 +11,8 @@ global message message
 end forward
 
 global variables
-Long gs_IdUsuario, gs_IdEmpresa
+Long gl_IdUsuario, gl_IdEmpresa
+String gs_NomeUsuario
 end variables
 global type tcc from application
 string appname = "tcc"

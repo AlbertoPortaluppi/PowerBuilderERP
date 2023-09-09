@@ -5,8 +5,8 @@ end type
 end forward
 
 global type w_ancestor from window
-integer width = 8503
-integer height = 3540
+integer width = 7136
+integer height = 3668
 boolean titlebar = true
 string title = "ERP"
 boolean controlmenu = true

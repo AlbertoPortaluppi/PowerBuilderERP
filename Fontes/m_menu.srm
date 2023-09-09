@@ -345,6 +345,9 @@ on m_comprarprodutos.destroy
 call super::destroy
 end on
 
+event clicked;Open(w_compra)
+end event
+
 type m_asfasdfsdfg from menu within m_menu
 m_venderprodutos m_venderprodutos
 end type
