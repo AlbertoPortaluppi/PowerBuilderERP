@@ -23,8 +23,8 @@ end type
 end forward
 
 global type w_ancestor_cadastro from w_ancestor
-integer width = 6295
-integer height = 3236
+integer width = 4873
+integer height = 2908
 string title = ""
 cb_incluir cb_incluir
 dw_filtros dw_filtros
@@ -44,7 +44,6 @@ public subroutine of_voltar ()
 public subroutine of_limparfiltros ()
 public subroutine of_incluir ()
 public function integer of_pesquisar ()
-public subroutine of_validar_exclusao ()
 public function integer of_validar_inclusao ()
 end prototypes
 
@@ -67,19 +66,6 @@ public function integer of_pesquisar ();dw_Corrente.SetTransObject(SQLCA)
 
 Return 1
 end function
-
-public subroutine of_validar_exclusao ();Long ll_For, ll_Find
-dw_Corrente.AcceptText()
-
-ll_Find = dw_Corrente.Find("flag = 'T'", 1, dw_Corrente.RowCount())
-If ll_Find > 0 Then
-	For ll_For = dw_Corrente.RowCount() To 0 Step -1
-		If dw_Corrente.GetItemString(ll_For, 'flag') = 'T' Then
-			dw_Corrente.RowsMove(ll_For, ll_For, Primary!, dw_Corrente, dw_Corrente.DeletedCount() + 1, Delete!)
-		End If
-	Next
-End If
-end subroutine
 
 public function integer of_validar_inclusao ();Return -1
 end function
@@ -128,8 +114,8 @@ dw_Corrente.SetTransObject(SQLCA)
 end event
 
 type cb_incluir from u_commandbutton within w_ancestor_cadastro
-integer x = 123
-integer y = 3024
+integer x = 101
+integer y = 2684
 integer width = 768
 integer taborder = 20
 boolean enabled = false
@@ -142,7 +128,7 @@ end event
 type dw_filtros from datawindow within w_ancestor_cadastro
 integer x = 146
 integer y = 84
-integer width = 5417
+integer width = 3968
 integer height = 360
 integer taborder = 30
 string title = "none"
@@ -151,7 +137,7 @@ borderstyle borderstyle = stylelowered!
 end type
 
 type cb_limparfiltros from u_commandbutton within w_ancestor_cadastro
-integer x = 5623
+integer x = 4174
 integer y = 88
 integer width = 581
 integer taborder = 20
@@ -162,7 +148,7 @@ event clicked;call super::clicked;of_LimparFiltros()
 end event
 
 type cb_pesquisar from u_commandbutton within w_ancestor_cadastro
-integer x = 5623
+integer x = 4174
 integer y = 328
 integer width = 581
 integer taborder = 20
@@ -180,10 +166,11 @@ end event
 type dw_corrente from datawindow within w_ancestor_cadastro
 integer x = 123
 integer y = 576
-integer width = 6080
-integer height = 2372
+integer width = 4704
+integer height = 2080
 integer taborder = 10
 string title = "none"
+boolean hscrollbar = true
 boolean vscrollbar = true
 boolean livescroll = true
 borderstyle borderstyle = stylelowered!
@@ -193,8 +180,8 @@ event rowfocuschanged;Selectrow(0,false)
 end event
 
 type cb_voltar from u_commandbutton within w_ancestor_cadastro
-integer x = 5490
-integer y = 3024
+integer x = 4064
+integer y = 2696
 integer width = 768
 integer taborder = 10
 string text = "Voltar"
@@ -204,8 +191,8 @@ event clicked;call super::clicked;of_Voltar()
 end event
 
 type cb_gravar from u_commandbutton within w_ancestor_cadastro
-integer x = 4603
-integer y = 3024
+integer x = 3177
+integer y = 2696
 integer width = 768
 integer taborder = 10
 boolean enabled = false
@@ -217,7 +204,6 @@ event clicked;call super::clicked;If of_Validar_Inclusao() = 1 Then
 	dw_Corrente.SetFilter('')
 	dw_Corrente.Filter()
 	
-	of_Validar_Exclusao()
 	of_Gravar()
 	
 	dw_Corrente.SetRedraw(True)
@@ -227,8 +213,8 @@ end event
 type gb_1 from groupbox within w_ancestor_cadastro
 integer x = 64
 integer y = 488
-integer width = 6194
-integer height = 2520
+integer width = 4777
+integer height = 2184
 integer taborder = 10
 integer textsize = -10
 integer weight = 700
@@ -244,7 +230,7 @@ end type
 type gb_2 from groupbox within w_ancestor_cadastro
 integer x = 64
 integer y = 12
-integer width = 6194
+integer width = 4782
 integer height = 476
 integer taborder = 10
 integer textsize = -10
