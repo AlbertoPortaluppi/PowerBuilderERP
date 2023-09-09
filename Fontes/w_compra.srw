@@ -16,6 +16,9 @@ on w_compra.destroy
 call super::destroy
 end on
 
+event open;call super::open;//
+end event
+
 type tab_geral from w_ancestor_compravenda`tab_geral within w_compra
 end type
 
@@ -54,7 +57,31 @@ type tabpage_operacao from w_ancestor_compravenda`tabpage_operacao within tab_ge
 string text = "Compra"
 end type
 
-type cb_1 from w_ancestor_compravenda`cb_1 within tabpage_operacao
+type cb_limpartela from w_ancestor_compravenda`cb_limpartela within tabpage_operacao
+end type
+
+type st_data from w_ancestor_compravenda`st_data within tabpage_operacao
+end type
+
+type st_datatexto from w_ancestor_compravenda`st_datatexto within tabpage_operacao
+end type
+
+type st_empresa from w_ancestor_compravenda`st_empresa within tabpage_operacao
+end type
+
+type st_empresatexto from w_ancestor_compravenda`st_empresatexto within tabpage_operacao
+end type
+
+type st_clifor from w_ancestor_compravenda`st_clifor within tabpage_operacao
+end type
+
+type st_1 from w_ancestor_compravenda`st_1 within tabpage_operacao
+end type
+
+type sle_clifor from w_ancestor_compravenda`sle_clifor within tabpage_operacao
+end type
+
+type cb_gravar from w_ancestor_compravenda`cb_gravar within tabpage_operacao
 end type
 
 type st_usuario from w_ancestor_compravenda`st_usuario within tabpage_operacao
@@ -74,5 +101,8 @@ end type
 
 type gb_corrente from w_ancestor_compravenda`gb_corrente within tabpage_operacao
 string text = "Compra"
+end type
+
+type gb_informacoes from w_ancestor_compravenda`gb_informacoes within tabpage_operacao
 end type
 
