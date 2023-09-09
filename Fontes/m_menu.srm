@@ -248,6 +248,9 @@ on m_cadastrodefornecedores.destroy
 call super::destroy
 end on
 
+event clicked;Open(w_cadclifor)
+end event
+
 type m_cadastrodeempresas from menu within m_asdfsd
 end type
 
