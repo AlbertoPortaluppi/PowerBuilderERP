@@ -115,6 +115,7 @@ integer y = 84
 integer width = 1275
 integer taborder = 10
 string text = "a@a"
+textcase textcase = upper!
 end type
 
 type sle_senha from u_singlelineedit within w_login
