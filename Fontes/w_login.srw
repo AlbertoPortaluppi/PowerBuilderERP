@@ -57,7 +57,7 @@ End If
 Return 1
 end function
 
-public function integer of_login ();String ls_Login, ls_Senha
+public function integer of_login ();String ls_Login, ls_Senha, ls_NomeUsuario
 Long ll_IdUsuario, ll_IdEmpresa
 
 ls_Login = Trim(sle_Login.Text)
@@ -65,10 +65,12 @@ ls_Senha = Trim(sle_Senha.Text)
 
 SELECT
 	IDUSUARIO,
-	IDEMPRESA
+	IDEMPRESA,
+	NOME
 INTO
 	:ll_IdUsuario,
-	:ll_IdEmpresa
+	:ll_IdEmpresa,
+	:ls_NomeUsuario
 FROM
 	USUARIO
 WHERE
@@ -82,8 +84,9 @@ If ll_IdUsuario <= 0 Then
 	Return -1
 End If
 
-gs_IdUsuario = ll_IdUsuario
-gs_IdEmpresa = ll_IdEmpresa
+gl_IdUsuario = ll_IdUsuario
+gl_IdEmpresa = ll_IdEmpresa
+gs_NomeUsuario = ls_NomeUsuario
 
 Open(w_menu)
 end function
@@ -114,7 +117,7 @@ integer x = 443
 integer y = 84
 integer width = 1275
 integer taborder = 10
-string text = "a@a"
+string text = "A@A"
 textcase textcase = upper!
 end type
 
