@@ -97,8 +97,11 @@ DataWindow idw_Filtros_Pesquisa, idw_Pesquisa, idw_Corrente
 Date idt_Data
 Long il_IdCliFor
 end variables
+
 forward prototypes
 public subroutine of_limpar ()
+public subroutine of_gravar ()
+public function integer of_valida_gravacao ()
 end prototypes
 
 public subroutine of_limpar ();idw_Corrente.Reset()
@@ -114,6 +117,35 @@ tab_geral.tabpage_operacao.cb_gravar.Enabled = False
 
 il_IdCliFor = 0
 end subroutine
+
+public subroutine of_gravar ();//
+end subroutine
+
+public function integer of_valida_gravacao ();Long ll_For
+
+idw_Corrente.AcceptText()
+
+For ll_For = 1 To idw_Corrente.RowCount()
+	If Uf_Null(idw_Corrente.GetItemDecimal(ll_For, "quantidade"), 0) = 0 Then
+		Msg('Informe uma quantidade para o produto.')
+		idw_Corrente.SetRow(ll_For)
+		idw_Corrente.SelectRow(ll_For, true)
+		idw_Corrente.SetFocus()
+		Return -1
+	End If
+	
+	If Uf_Null(idw_Corrente.GetItemDecimal(ll_For, "preco"), 0) = 0 Then
+		Msg('Informe um pre$$HEX1$$e700$$ENDHEX$$o para o produto.')
+		idw_Corrente.SetRow(ll_For)
+		idw_Corrente.SelectRow(ll_For, true)
+		idw_Corrente.SetFocus()
+		Return -1
+	End If
+	
+Next
+
+Return 1
+end function
 
 on w_ancestor_compravenda.create
 int iCurrent
@@ -495,6 +527,11 @@ boolean enabled = false
 string text = "Gravar"
 end type
 
+event clicked;call super::clicked;If Of_Valida_Gravacao() > 0 Then
+	of_Gravar()
+End If
+end event
+
 type st_usuario from u_statictext within tabpage_operacao
 integer x = 2949
 integer y = 76
@@ -557,6 +594,7 @@ ll_Row = idw_Corrente.InsertRow(0)
 idw_Corrente.SetItem(ll_Row, 'IDCLIFOR', il_IdCliFor)
 idw_Corrente.SetItem(ll_Row, 'DATA_MOVIMENTO', idt_Data)
 idw_Corrente.SetItem(ll_Row, 'IDEMPRESA', gl_IdEmpresa)
+idw_Corrente.SetItem(ll_Row, 'IDUSUARIO', gl_IdUsuario)
 end event
 
 type dw_corrente from datawindow within tabpage_operacao
@@ -572,6 +610,9 @@ boolean vscrollbar = true
 boolean livescroll = true
 borderstyle borderstyle = stylelowered!
 end type
+
+event rowfocuschanged;Selectrow(0,false)
+end event
 
 type gb_corrente from groupbox within tabpage_operacao
 integer y = 140
