@@ -5,6 +5,7 @@ end type
 end forward
 
 global type w_compra from w_ancestor_compravenda
+string title = "ERP - Compra de produtos"
 end type
 global w_compra w_compra
 
@@ -81,6 +82,7 @@ type cb_limpafiltrospesquisa from w_ancestor_compravenda`cb_limpafiltrospesquisa
 end type
 
 type dw_filtros_pesquisa from w_ancestor_compravenda`dw_filtros_pesquisa within tabpage_pesquisa
+string dataobject = "d_filtros_compra"
 end type
 
 type dw_pesquisa from w_ancestor_compravenda`dw_pesquisa within tabpage_pesquisa
