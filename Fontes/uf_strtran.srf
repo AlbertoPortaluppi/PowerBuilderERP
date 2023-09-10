@@ -1,0 +1,26 @@
+HA$PBExportHeader$uf_strtran.srf
+global type uf_strtran from function_object
+end type
+
+forward prototypes
+global function string uf_strtran (string as_strcompleta, string as_strachar, string as_strsubstituir)
+end prototypes
+
+global function string uf_strtran (string as_strcompleta, string as_strachar, string as_strsubstituir);string ls_Result
+long ll_Posicao
+
+// Encontre a posi$$HEX2$$e700e300$$ENDHEX$$o da string a ser substitu$$HEX1$$ed00$$ENDHEX$$da na string completa.
+ll_Posicao = Pos(as_strCompleta, as_strAchar)
+
+// Se a string a ser substitu$$HEX1$$ed00$$ENDHEX$$da n$$HEX1$$e300$$ENDHEX$$o foi encontrada na string completa, retorne a string original.
+if ll_Posicao = 0 then
+    ls_Result = as_strCompleta
+else
+    // Substitua a parte da string encontrada pela string de substitui$$HEX2$$e700e300$$ENDHEX$$o.
+    ls_Result = Left(as_strCompleta, ll_Posicao - 1) + as_strSubstituir + Right(as_strCompleta, Len(as_strCompleta) - ll_Posicao - Len(as_strAchar) + 1)
+end if
+
+return ls_Result
+
+end function
+
