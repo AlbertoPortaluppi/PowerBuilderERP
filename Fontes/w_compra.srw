@@ -8,6 +8,45 @@ global type w_compra from w_ancestor_compravenda
 end type
 global w_compra w_compra
 
+forward prototypes
+public subroutine of_gravar ()
+end prototypes
+
+public subroutine of_gravar ();Long ll_For, ll_MaxId
+Integer li_Ret
+DateTime lde_Agora
+
+SELECT
+	MAX(IDMOVIMENTO),
+	CURRENT_TIMESTAMP
+INTO
+	:ll_MaxId,
+	:lde_Agora
+FROM
+	COMPRA_VENDA
+USING SQLCA;
+
+ll_MaxId = Uf_Null(ll_MaxId, 0) + 1
+
+For ll_For = 1 To idw_Corrente.RowCount()
+	idw_Corrente.SetItem(ll_For, 'IDMOVIMENTO', ll_MaxId)
+	idw_Corrente.SetItem(ll_For, 'TIPOMOVIMENTO', 'C')
+	idw_Corrente.SetItem(ll_For, 'DATA_MOVIMENTO', lde_Agora)
+Next
+
+li_Ret = idw_Corrente.Update()
+
+If li_Ret > 0 Then
+	COMMIT USING SQLCA;
+	idw_Corrente.SetRedraw(True)
+	Msg('Informa$$HEX2$$e700f500$$ENDHEX$$es salvas com sucesso!')
+	of_Limpar()
+Else
+	ROLLBACK USING SQLCA;
+	Msg('Ocorreu um erro ao gravar as informa$$HEX2$$e700f500$$ENDHEX$$es.')
+End If
+end subroutine
+
 on w_compra.create
 call super::create
 end on
