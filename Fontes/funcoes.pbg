@@ -4,5 +4,6 @@ Save Format v3.0(19990112)
 @end;
 @begin Objects
  "Fontes\\uf_null.srf" "Fontes\\funcoes.pbl";
+ "Fontes\\uf_strtran.srf" "Fontes\\funcoes.pbl";
  "Fontes\\msg.srf" "Fontes\\funcoes.pbl";
 @end;
