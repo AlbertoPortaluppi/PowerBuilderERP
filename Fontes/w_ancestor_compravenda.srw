@@ -97,9 +97,6 @@ end type
 end forward
 
 global type w_ancestor_compravenda from w_ancestor
-integer width = 5271
-integer height = 3024
-string icon = "Window!"
 tab_geral tab_geral
 end type
 global w_ancestor_compravenda w_ancestor_compravenda
@@ -108,9 +105,10 @@ type variables
 DataWindow idw_Filtros_Pesquisa, idw_Pesquisa, idw_Produtos, idw_Corrente
 Date idt_Data
 Long il_IdCliFor, il_IdMovimento
-String is_SqlOriginal
+String is_SqlOriginal, is_Tela
 Boolean ib_Alterando
 end variables
+
 forward prototypes
 public subroutine of_limpar ()
 public subroutine of_gravar ()
@@ -218,9 +216,23 @@ End If
 
 If Uf_Null(idw_Filtros_Pesquisa.GetItemString(1, "TIPOMOVIMENTO"), "") <> "" Then
 	If Len(ls_Where) <= 0 Then
-		ls_Where = "((CV.TIPOMOVIMENTO) = '" + String(idw_Filtros_Pesquisa.GetItemString(1, "CNPJ")) + "')"
+		ls_Where = "((CV.TIPOMOVIMENTO) = '" + String(idw_Filtros_Pesquisa.GetItemString(1, "TIPOMOVIMENTO")) + "')"
 	Else
-		ls_Where = ls_Where + " and ((CV.TIPOMOVIMENTO) = '" + String(idw_Filtros_Pesquisa.GetItemString(1, "CNPJ")) + "')"
+		ls_Where = ls_Where + " and ((CV.TIPOMOVIMENTO) = '" + String(idw_Filtros_Pesquisa.GetItemString(1, "TIPOMOVIMENTO")) + "')"
+	End If
+Else
+	If is_Tela = 'C' Then
+		If Len(ls_Where) <= 0 Then
+			ls_Where = "((CV.TIPOMOVIMENTO) IN('C', 'DC') )"
+		Else
+			ls_Where = ls_Where + " and ((CV.TIPOMOVIMENTO) IN('C', 'DC') )"
+		End If
+	Else
+		If Len(ls_Where) <= 0 Then
+			ls_Where = "((CV.TIPOMOVIMENTO) IN('V', 'DV') )"
+		Else
+			ls_Where = ls_Where + " and ((CV.TIPOMOVIMENTO) IN('V', 'DV') )"
+		End If
 	End If
 End If
 
@@ -419,6 +431,31 @@ boolean enabled = false
 string text = "Excluir"
 end type
 
+event clicked;call super::clicked;Long ll_Find, ll_IdMovimento
+
+If MessageBox('ERP', 'Deseja excluir o registro selecionado?', Question!, YesNo!) = 1 Then
+	ll_Find = idw_Pesquisa.Find("FLAG = 'T'", 1, idw_Pesquisa.RowCount())
+	ll_IdMovimento = idw_Pesquisa.GetItemNumber(ll_Find, 'idmovimento')
+	
+	DELETE FROM
+		COMPRA_VENDA
+	WHERE
+		IDMOVIMENTO = :ll_IdMovimento
+	USING
+		SQLCA;
+		
+	If SQLCA.SqlCode = 0 Then
+		COMMIT USING SQLCA;
+		Msg('Registro ' + String(ll_IdMovimento) + ' exclu$$HEX1$$ed00$$ENDHEX$$do com sucesso!')
+	Else
+		ROLLBACK USING SQLCA;
+		Msg('Houve um erro ao deletar o registro ' + String(ll_IdMovimento) + '. Verifique!')
+	End If
+	
+	of_Pesquisar()
+End If
+end event
+
 type cb_alterar from u_commandbutton within tabpage_pesquisa
 integer x = 4741
 integer y = 744
@@ -531,8 +568,6 @@ If row > 0 Then
 	ll_Find = This.Find("FLAG = 'T'", 1, This.RowCount())
 	
 	This.SetItem(ll_Find, "FLAG", 'F')
-	
-	//Post Event ue_Post_itemchanged(row, dwo, data)
 End If
 end event
 
@@ -872,7 +907,7 @@ end type
 
 event ue_postitemchanged(long row, dwobject dwo, string data);Long ll_IdProduto, ll_IdProdutoData
 String ls_NomeProduto, ls_NomeProdutoData
-Boolean lb_Inseriu
+Decimal lde_ValorProduto, lde_Quantidade
 
 If dwo.Name = 'idprodutoe' Then
 	If IsNumber(data) Then
@@ -928,6 +963,39 @@ If dwo.Name = 'idprodutoe' Then
 		Else
 			Msg('Produto n$$HEX1$$e300$$ENDHEX$$o encontrado.')
 		End If
+	End If
+	
+	If is_Tela = 'V' And Uf_Null(ll_IdProduto, 0) > 0 Then
+		SELECT
+			PPV.PRECO,
+			CE.QUANTIDADE
+		INTO
+			:lde_ValorProduto,
+			:lde_Quantidade
+		FROM
+			PRODUTO_PRECO_VENDA PPV
+			FULL OUTER JOIN CONTROLE_ESTOQUE CE ON(
+			PPV.IDEMPRESA = CE.IDEMPRESA AND
+			PPV.IDPRODUTO = CE.IDPRODUTO)
+		WHERE
+			(PPV.IDEMPRESA = :gl_IdEmpresa AND
+			PPV.IDPRODUTO = :ll_IdProduto) OR
+			(CE.IDEMPRESA = :gl_IdEmpresa AND
+			CE.IDPRODUTO = :ll_IdProduto)
+		USING
+			SQLCA;
+			
+		This.SetItem(Row, 'preco', Uf_Null(lde_ValorProduto, 0))
+		This.SetItem(Row, 'quantidade_estoque', Uf_Null(lde_Quantidade, 0))
+	End If
+	
+	This.SetItem(Row, 'Quantidade', 0)
+End If
+
+If dwo.Name = 'quantidade' And is_Tela = 'V' Then
+	If This.GetItemDecimal(Row, 'quantidade') > This.GetItemDecimal(Row, 'quantidade_estoque') Then
+		This.SetItem(Row, 'Quantidade', This.GetItemDecimal(Row, 'quantidade_estoque'))
+		Msg('A quantidade inserida n$$HEX1$$e300$$ENDHEX$$o pode ser maior que a dispon$$HEX1$$ed00$$ENDHEX$$vel em estoque.')
 	End If
 End If
 end event
