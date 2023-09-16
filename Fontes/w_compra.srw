@@ -28,7 +28,7 @@ FROM
 USING SQLCA;
 
 If Not ib_Alterando Then
-	ll_MaxId++
+	ll_MaxId = Uf_Null(ll_MaxId, 0) + 1
 Else
 	ll_MaxId = il_IdMovimento
 End If
@@ -60,7 +60,7 @@ on w_compra.destroy
 call super::destroy
 end on
 
-event open;call super::open;//
+event open;call super::open;is_Tela = 'C'
 end event
 
 type tab_geral from w_ancestor_compravenda`tab_geral within w_compra
