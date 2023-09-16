@@ -107,16 +107,17 @@ global w_ancestor_compravenda w_ancestor_compravenda
 type variables
 DataWindow idw_Filtros_Pesquisa, idw_Pesquisa, idw_Produtos, idw_Corrente
 Date idt_Data
-Long il_IdCliFor
+Long il_IdCliFor, il_IdMovimento
 String is_SqlOriginal
+Boolean ib_Alterando
 end variables
-
 forward prototypes
 public subroutine of_limpar ()
 public subroutine of_gravar ()
 public function integer of_valida_gravacao ()
 public function integer of_valida_insercao_produto (long al_idproduto)
 public subroutine of_pesquisar ()
+public subroutine of_alterar (long al_row)
 end prototypes
 
 public subroutine of_limpar ();idw_Corrente.Reset()
@@ -176,6 +177,7 @@ End If
 end function
 
 public subroutine of_pesquisar ();String ls_Where, ls_SqlNew
+DateTime ldt_DataInicio, ldt_DataFim
 
 If is_SqlOriginal = '' Then
 	is_SqlOriginal = idw_Pesquisa.GetSqlSelect()
@@ -222,6 +224,15 @@ If Uf_Null(idw_Filtros_Pesquisa.GetItemString(1, "TIPOMOVIMENTO"), "") <> "" The
 	End If
 End If
 
+ldt_DataInicio = idw_Filtros_Pesquisa.GetItemDateTime(1, 'dtinicio')
+ldt_DataFim = idw_Filtros_Pesquisa.GetItemDateTime(1, 'dtfim')
+
+If Len(ls_Where) <= 0 Then
+		ls_Where = "((CV.DATA_MOVIMENTO) BETWEEN '" + String(ldt_DataInicio) + "' AND '" + String(ldt_DataFim) + "')"
+	Else
+		ls_Where = ls_Where + " and ((CV.DATA_MOVIMENTO) BETWEEN '" + String(ldt_DataInicio) + "' AND '" + String(ldt_DataFim) + "')"
+	End If
+
 If Len(ls_Where) > 0 Then
 	ls_SqlNew = uf_StrTran(is_SqlOriginal, '1 = 1', ls_Where)
 	
@@ -239,6 +250,28 @@ Else
 	
 	idw_Produtos.Retrieve(idw_Pesquisa.GetItemNumber(1, 'IDMOVIMENTO'))
 End If
+end subroutine
+
+public subroutine of_alterar (long al_row);String ls_SqlOriginal, ls_SqlModificado
+Long ll_IdCliFor, ll_For
+
+ls_SqlOriginal = idw_Corrente.GetSqlSelect()
+ls_SqlModificado = uf_StrTran(ls_SqlOriginal, '1 = 1', 'CV.IDMOVIMENTO = ' + String(il_IdMovimento))
+idw_Corrente.SetSqlSelect(ls_SqlModificado)
+idw_Corrente.Retrieve()
+idw_Corrente.SetSqlSelect(ls_SqlOriginal)
+
+ll_IdCliFor = idw_Pesquisa.GetItemNumber(al_Row, 'idclifor')
+
+tab_geral.tabpage_operacao.sle_CliFor.Text = String(ll_IdCliFor)
+
+tab_geral.tabpage_operacao.sle_CliFor.PostEvent(Modified!)
+
+For ll_For = 1 To idw_Corrente.RowCount()
+	idw_Corrente.SetItemStatus(ll_For, 0, Primary!, DataModified!)
+Next
+
+tab_geral.SelectTab(2)
 end subroutine
 
 on w_ancestor_compravenda.create
@@ -286,6 +319,7 @@ tab_geral.tabpage_operacao.st_usuario.Text = String(gl_IdUsuario) + ' - ' + gs_N
 tab_geral.tabpage_operacao.st_empresa.Text = String(gl_IdEmpresa) + ' - ' + ls_Empresa
 tab_geral.tabpage_operacao.st_data.Text = String(idt_Data)
 
+idw_Filtros_Pesquisa.SetItem(1, 'dtinicio', DateTime(1900-01-01, Time("00:00:00")))
 idw_Filtros_Pesquisa.SetItem(1, 'dtfim', DateTime(idt_Data, Time("23:59:59")))
 end event
 
@@ -393,6 +427,17 @@ boolean enabled = false
 string text = "Alterar"
 end type
 
+event clicked;call super::clicked;Long ll_Find
+
+If MessageBox('ERP', 'Deseja alterar o registro selecionado?', Question!, YesNo!) = 1 Then
+	ib_Alterando = True
+	ll_Find = idw_Pesquisa.Find("FLAG = 'T'", 1, idw_Pesquisa.RowCount())
+	il_IdMovimento = idw_Pesquisa.GetItemNumber(ll_Find, 'idmovimento')
+	
+	of_Alterar(ll_Find)
+End If
+end event
+
 type dw_produtos from datawindow within tabpage_pesquisa
 integer x = 37
 integer y = 1404
@@ -433,6 +478,7 @@ idw_Produtos.Reset()
 end event
 
 type dw_filtros_pesquisa from datawindow within tabpage_pesquisa
+event ue_postitemchanged ( long row,  dwobject dwo,  string data )
 integer x = 37
 integer y = 68
 integer width = 4658
@@ -443,6 +489,17 @@ string dataobject = "d_filtros_compravenda"
 boolean livescroll = true
 borderstyle borderstyle = stylelowered!
 end type
+
+event ue_postitemchanged(long row, dwobject dwo, string data);if dwo.Name = 'dtinicio' Or dwo.Name = 'dtfim' Then
+	If This.GetItemDateTime(1, 'dtinicio') > This.GetItemDateTime(1, 'dtfim') Then
+		This.SetItem(1, 'dtfim', This.GetItemDateTime(1, 'dtinicio'))
+		Msg('A data de in$$HEX1$$ed00$$ENDHEX$$cio n$$HEX1$$e300$$ENDHEX$$o pode ser maior que a data de fim.')
+	End If
+End If
+end event
+
+event itemchanged;Post Event ue_PostItemChanged(row, dwo, data)
+end event
 
 type dw_pesquisa from datawindow within tabpage_pesquisa
 event ue_post_itemchanged ( long row,  dwobject dwo,  string data )
