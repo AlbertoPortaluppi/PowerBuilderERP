@@ -410,6 +410,9 @@ on m_venderprodutos.destroy
 call super::destroy
 end on
 
+event clicked;Open(w_venda)
+end event
+
 type m_1 from menu within m_menu
 m_checarestoque m_checarestoque
 end type
@@ -500,6 +503,9 @@ end on
 on m_trocarempresa.destroy
 call super::destroy
 end on
+
+event clicked;Open(w_Troca_empresa)
+end event
 
 type m_sobre from menu within m_menu
 end type

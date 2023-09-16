@@ -5,14 +5,14 @@ end type
 end forward
 
 global type w_ancestor from window
-integer width = 7136
-integer height = 3668
+integer width = 5271
+integer height = 3024
 boolean titlebar = true
 string title = "ERP"
 boolean controlmenu = true
 windowtype windowtype = response!
 long backcolor = 67108864
-string icon = "AppIcon!"
+string icon = "Window!"
 boolean center = true
 end type
 global w_ancestor w_ancestor
