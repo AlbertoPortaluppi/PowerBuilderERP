@@ -5,6 +5,7 @@ Save Format v3.0(19990112)
 @begin Objects
  "Fontes\\d_compravenda.srd" "Fontes\\compras.pbl";
  "Fontes\\w_compra.srw" "Fontes\\compras.pbl";
+ "Fontes\\d_cabecalho_vendas.srd" "Fontes\\compras.pbl";
  "Fontes\\d_cabecalho_compras.srd" "Fontes\\compras.pbl";
  "Fontes\\d_filtros_compravenda.srd" "Fontes\\compras.pbl";
  "Fontes\\d_produtos_compravenda.srd" "Fontes\\compras.pbl";
