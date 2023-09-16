@@ -27,7 +27,11 @@ FROM
 	COMPRA_VENDA
 USING SQLCA;
 
-ll_MaxId = Uf_Null(ll_MaxId, 0) + 1
+If Not ib_Alterando Then
+	ll_MaxId++
+Else
+	ll_MaxId = il_IdMovimento
+End If
 
 For ll_For = 1 To idw_Corrente.RowCount()
 	idw_Corrente.SetItem(ll_For, 'IDMOVIMENTO', ll_MaxId)
@@ -75,6 +79,15 @@ end on
 type tabpage_pesquisa from w_ancestor_compravenda`tabpage_pesquisa within tab_geral
 end type
 
+type cb_excluirpesquisa from w_ancestor_compravenda`cb_excluirpesquisa within tabpage_pesquisa
+end type
+
+type cb_alterar from w_ancestor_compravenda`cb_alterar within tabpage_pesquisa
+end type
+
+type dw_produtos from w_ancestor_compravenda`dw_produtos within tabpage_pesquisa
+end type
+
 type cb_pesquisapesquisa from w_ancestor_compravenda`cb_pesquisapesquisa within tabpage_pesquisa
 end type
 
@@ -92,6 +105,9 @@ type gb_filtro from w_ancestor_compravenda`gb_filtro within tabpage_pesquisa
 end type
 
 type gb_pesquisa from w_ancestor_compravenda`gb_pesquisa within tabpage_pesquisa
+end type
+
+type gb_produtos from w_ancestor_compravenda`gb_produtos within tabpage_pesquisa
 end type
 
 type tabpage_operacao from w_ancestor_compravenda`tabpage_operacao within tab_geral
