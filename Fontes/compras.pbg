@@ -3,6 +3,7 @@ Save Format v3.0(19990112)
  "Fontes\\compras.pbl" "";
 @end;
 @begin Objects
+ "Fontes\\d_filtros_venda.srd" "Fontes\\compras.pbl";
  "Fontes\\d_compravenda.srd" "Fontes\\compras.pbl";
  "Fontes\\d_venda.srd" "Fontes\\compras.pbl";
  "Fontes\\w_compra.srw" "Fontes\\compras.pbl";
