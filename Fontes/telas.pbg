@@ -7,5 +7,6 @@ Save Format v3.0(19990112)
  "Fontes\\d_empresas.srd" "Fontes\\telas.pbl";
  "Fontes\\w_menu.srw" "Fontes\\telas.pbl";
  "Fontes\\w_login.srw" "Fontes\\telas.pbl";
+ "Fontes\\w_sobre.srw" "Fontes\\telas.pbl";
  "Fontes\\w_ancestor_compravenda.srw" "Fontes\\telas.pbl";
 @end;
