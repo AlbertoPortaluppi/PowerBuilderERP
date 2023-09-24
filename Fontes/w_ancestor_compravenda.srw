@@ -105,7 +105,7 @@ type variables
 DataWindow idw_Filtros_Pesquisa, idw_Pesquisa, idw_Produtos, idw_Corrente
 Date idt_Data
 Long il_IdCliFor, il_IdMovimento
-String is_SqlOriginal, is_Tela
+String is_SqlOriginal, is_SqlOriginalUpdate, is_Tela
 Boolean ib_Alterando
 end variables
 
@@ -130,6 +130,10 @@ tab_geral.tabpage_operacao.cb_excluir.Enabled = False
 tab_geral.tabpage_operacao.cb_gravar.Enabled = False
 
 il_IdCliFor = 0
+il_IdMovimento = 0
+ib_Alterando = False
+
+If Len(is_SqlOriginalUpdate) <> 0 Then idw_Corrente.Object.DataWindow.Table.Select = is_SqlOriginalUpdate
 end subroutine
 
 public subroutine of_gravar ();//
@@ -264,14 +268,14 @@ Else
 End If
 end subroutine
 
-public subroutine of_alterar (long al_row);String ls_SqlOriginal, ls_SqlModificado
+public subroutine of_alterar (long al_row);String ls_SqlModificado
 Long ll_IdCliFor, ll_For
 
-ls_SqlOriginal = idw_Corrente.GetSqlSelect()
-ls_SqlModificado = uf_StrTran(ls_SqlOriginal, '1 = 1', 'CV.IDMOVIMENTO = ' + String(il_IdMovimento))
-idw_Corrente.SetSqlSelect(ls_SqlModificado)
+is_SqlOriginalUpdate = idw_Corrente.GetSqlSelect()
+ls_SqlModificado = uf_StrTran(is_SqlOriginalUpdate, '1 = 1', 'CV.IDMOVIMENTO = ' + String(il_IdMovimento))
+
+idw_Corrente.Object.DataWindow.Table.Select = ls_SqlModificado
 idw_Corrente.Retrieve()
-idw_Corrente.SetSqlSelect(ls_SqlOriginal)
 
 ll_IdCliFor = idw_Pesquisa.GetItemNumber(al_Row, 'idclifor')
 
