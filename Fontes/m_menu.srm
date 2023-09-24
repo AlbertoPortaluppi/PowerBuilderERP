@@ -475,6 +475,9 @@ on m_checarestoque.destroy
 call super::destroy
 end on
 
+event clicked;Open(w_controle_estoque)
+end event
+
 type m_trocarempresa from menu within m_menu
 end type
 
