@@ -150,6 +150,27 @@ type dw_corrente from w_ancestor_cadastro`dw_corrente within w_cadempresa
 string dataobject = "d_cadempresa"
 end type
 
+event dw_corrente::ue_postitemchanged;call super::ue_postitemchanged;Long ll_IdEmpresa
+
+If dwo.name = 'cnpj' Then
+	SELECT
+		IDEMPRESA
+	INTO
+		:ll_IdEmpresa
+	FROM
+		EMPRESA
+	WHERE
+		CNPJ = :DATA
+	USING
+		SQLCA;
+		
+	If Uf_Null(ll_IdEmpresa, 0) > 0 Then
+		This.SetItem(row, 'cnpj', '')
+		Msg('CNPJ j$$HEX2$$e1002000$$ENDHEX$$utilizado.')
+	End If
+End If
+end event
+
 type cb_voltar from w_ancestor_cadastro`cb_voltar within w_cadempresa
 end type
 

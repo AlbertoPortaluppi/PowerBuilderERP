@@ -5,6 +5,7 @@ end type
 end forward
 
 global type w_cadclifor from w_ancestor_cadastro
+string title = "ERP - Cadastro de Clientes e Fornecedores"
 end type
 global w_cadclifor w_cadclifor
 
@@ -94,6 +95,22 @@ For ll_For = 1 To dw_Corrente.RowCount()
 		Return -1
 	End If
 	
+	If Uf_Null(dw_Corrente.GetItemString(ll_For, "CNPJCPF"), "") = "" Then
+		Msg('Informe um CNPJ / CPF para o cliente/fornecedor.')
+		dw_Corrente.SetRow(ll_For)
+		dw_Corrente.SelectRow(ll_For, true)
+		dw_Corrente.SetFocus()
+		Return -1
+	End If
+	
+	If Len(dw_Corrente.GetItemString(ll_For, "CNPJCPF")) <> 11 And Len(dw_Corrente.GetItemString(ll_For, "CNPJCPF")) <> 14 Then
+		Msg('O CNPJ ou CPF precisa ter 14 ou 11 caracteres.')
+		dw_Corrente.SetRow(ll_For)
+		dw_Corrente.SelectRow(ll_For, true)
+		dw_Corrente.SetFocus()
+		Return -1
+	End If
+	
 	If Uf_Null(dw_Corrente.GetItemString(ll_For, "ENDERECO"), "") = "" Then
 		Msg('Informe um endere$$HEX1$$e700$$ENDHEX$$o para o cliente/fornecedor.')
 		dw_Corrente.SetRow(ll_For)
@@ -102,13 +119,6 @@ For ll_For = 1 To dw_Corrente.RowCount()
 		Return -1
 	End If
 	
-	If Uf_Null(dw_Corrente.GetItemString(ll_For, "CNPJCPF"), "") = "" Then
-		Msg('Informe um CNPJ / CPF para o cliente/fornecedor.')
-		dw_Corrente.SetRow(ll_For)
-		dw_Corrente.SelectRow(ll_For, true)
-		dw_Corrente.SetFocus()
-		Return -1
-	End If
 	
 	If Uf_Null(dw_Corrente.GetItemString(ll_For, "TELEFONE"), "") = "" Then
 		Msg('Informe um n$$HEX1$$fa00$$ENDHEX$$mero de telefone para o cliente/fornecedor.')
@@ -180,6 +190,32 @@ end type
 type dw_corrente from w_ancestor_cadastro`dw_corrente within w_cadclifor
 string dataobject = "d_cadclifor"
 end type
+
+event dw_corrente::ue_postitemchanged;call super::ue_postitemchanged;Long ll_Idclifor
+
+If dwo.name = 'cnpjcpf' Then
+	SELECT
+		IDCLIFOR
+	INTO
+		:ll_Idclifor
+	FROM
+		CLIENTE_FORNECEDOR
+	WHERE
+		CNPJCPF = :DATA
+	USING
+		SQLCA;
+	
+	If Uf_Null(ll_Idclifor, 0) > 0 Then
+		This.SetItem(row, 'cnpj', '')
+		Msg('CNPJ / CPF j$$HEX2$$e1002000$$ENDHEX$$utilizado.')
+	End If
+
+	If Len(data) <> 11 And Len(data) <> 14 Then
+		Msg('O CNPJ ou CPF precisa ter 11 ou 14 caracteres.')
+	End If
+	
+End If
+end event
 
 type cb_voltar from w_ancestor_cadastro`cb_voltar within w_cadclifor
 end type

@@ -188,6 +188,27 @@ string dataobject = "d_cadusuario"
 boolean hsplitscroll = true
 end type
 
+event dw_corrente::ue_postitemchanged;call super::ue_postitemchanged;Long ll_IdUsuario
+
+If dwo.name = 'email' Then
+	SELECT
+		IDUSUARIO
+	INTO
+		:ll_IdUsuario
+	FROM
+		USUARIO
+	WHERE
+		EMAIL = :DATA
+	USING
+		SQLCA;
+		
+	If Uf_Null(ll_IdUsuario, 0) > 0 Then
+		This.SetItem(row, 'email', '')
+		Msg('Email j$$HEX2$$e1002000$$ENDHEX$$utilizado.')
+	End If
+End If
+end event
+
 type cb_voltar from w_ancestor_cadastro`cb_voltar within w_cadusuario
 end type
 

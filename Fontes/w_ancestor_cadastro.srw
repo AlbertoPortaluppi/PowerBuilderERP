@@ -164,6 +164,7 @@ End If
 end event
 
 type dw_corrente from datawindow within w_ancestor_cadastro
+event ue_postitemchanged ( long row,  dwobject dwo,  string data )
 integer x = 123
 integer y = 576
 integer width = 4704
@@ -176,7 +177,13 @@ boolean livescroll = true
 borderstyle borderstyle = stylelowered!
 end type
 
+event ue_postitemchanged(long row, dwobject dwo, string data);//
+end event
+
 event rowfocuschanged;Selectrow(0,false)
+end event
+
+event itemchanged;Post Event ue_postitemchanged(row, dwo, data)
 end event
 
 type cb_voltar from u_commandbutton within w_ancestor_cadastro
