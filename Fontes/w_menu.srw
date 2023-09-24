@@ -7,8 +7,8 @@ end type
 end forward
 
 global type w_menu from window
-integer width = 8814
-integer height = 3736
+integer width = 3831
+integer height = 3380
 boolean titlebar = true
 string title = "ERP"
 string menuname = "m_menu"
@@ -39,8 +39,6 @@ event open;If IsValid(w_Login) Then close(w_Login)
 end event
 
 type p_1 from picture within w_menu
-integer x = 2441
-integer y = 412
 integer width = 3771
 integer height = 3192
 boolean originalsize = true
