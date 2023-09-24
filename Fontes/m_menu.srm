@@ -539,3 +539,6 @@ on m_sobre.destroy
 call super::destroy
 end on
 
+event clicked;Open(w_sobre)
+end event
+
