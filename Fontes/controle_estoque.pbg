@@ -1,1 +1,9 @@
 Save Format v3.0(19990112)
+@begin Libraries
+ "Fontes\\controle_estoque.pbl" "";
+@end;
+@begin Objects
+ "Fontes\\d_filtros_estoque.srd" "Fontes\\controle_estoque.pbl";
+ "Fontes\\d_controle_estoque.srd" "Fontes\\controle_estoque.pbl";
+ "Fontes\\w_controle_estoque.srw" "Fontes\\controle_estoque.pbl";
+@end;
