@@ -160,6 +160,7 @@ string dataobject = "d_venda"
 end type
 
 type gb_corrente from w_ancestor_compravenda`gb_corrente within tabpage_operacao
+string text = "Venda"
 end type
 
 type gb_informacoes from w_ancestor_compravenda`gb_informacoes within tabpage_operacao
